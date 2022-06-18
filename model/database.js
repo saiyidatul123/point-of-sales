@@ -11,22 +11,24 @@ const con = mysql.createConnection({
   user: DB_USER || "root",
   password: DB_PASS,
   database: DB_NAME,
-  multipleStatements: true
+  multipleStatements: true,
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 
   let sql =
-    "DROP TABLE IF EXISTS contacts; DROP TABLE IF EXISTS events; DROP TABLE IF EXISTS stickers; CREATE TABLE contacts (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100), phone VARCHAR(15), birthday VARCHAR(15)); CREATE TABLE events (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, date VARCHAR(40), title VARCHAR(40)); CREATE TABLE stickers (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(40), url VARCHAR(2083), creator VARCHAR(40), theme VARCHAR(40));";
-  con.query(sql, function(err, result) {
+    "DROP TABLE if exists orders; CREATE TABLE orders (ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, reference_no VARCHAR(100), tax INT, service_charges INT, total_amount_cents INT, is_walkin BOOLEAN, status ENUM('pending','completed')); DROP TABLE if exists order_items; CREATE TABLE order_items (ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY, order_id INT NOT NULL REFERENCES orders(ID), cost_per_item INT, product_name VARCHAR(100), quantity INT); DROP TABLE if exists transactions; CREATE TABLE transactions (ID INT NOT NULL REFERENCES orders(ID), order_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, payment_method VARCHAR(100), status ENUM('pending','paid'), paid_amount_cents INT);";
+
+  con.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("Table creation `contacts, events, stickers` were successful!");
+    console.log(
+      "Table creation `orders, order_items, transactions` were successful!"
+    );
 
     console.log("Closing...");
   });
 
   con.end();
 });
-

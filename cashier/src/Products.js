@@ -1,12 +1,7 @@
-import React from "react";
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-} from "@mui/material";
-
-import "./Products.css"
+import React, { useState, useEffect } from "react";
+import { Grid, Card, CardContent, CardMedia } from "@mui/material";
+import "./Products.css";
+import axios from "axios";
 
 const stylingObject = {
   div: {
@@ -16,12 +11,33 @@ const stylingObject = {
 };
 
 function Products() {
+  const [error, setError] = useState(null);
+  const [item, setItem] = useState([]);
+
+  const addItem = (data) => {
+    //  console.log("printing input",data);
+    axios
+      .post(`http://localhost:5000/order_items`, data)
+      .then((response) => {
+        setItem(response.data.message);
+        console.log("Item added");
+      })
+      .catch((error) => {
+        setError("Error in adding new item");
+      });
+  };
+
   return (
     <div className="product-grid" style={stylingObject.div}>
-      <Grid container justifyContent="center"
-  alignItems="center" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
         <Grid item xs={6}>
-          <Card className="item1">
+          <Card className="item1" onClick={addItem}>
             <CardMedia
               component="img"
               height="150"
@@ -57,7 +73,7 @@ function Products() {
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Card  className="item4">
+          <Card className="item4">
             <CardMedia
               component="img"
               height="150"

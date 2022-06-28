@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  Grid,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import "./Layout.css";
 import Products from "./Products";
 import Cart from "./Cart";
@@ -13,12 +11,12 @@ function Layout() {
         <Grid item xs={6}>
           POS Cashier
           <div className="table">
-            <Cart/>
+            <Cart />
           </div>
         </Grid>
         <Grid item xs={6}>
           Products
-          <Products/>
+          <Products />
         </Grid>
       </Grid>
     </div>

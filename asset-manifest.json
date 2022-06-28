@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/point-of-sales/static/css/main.60bba8f4.css",
+    "main.js": "/point-of-sales/static/js/main.adb1f938.js",
+    "index.html": "/point-of-sales/index.html",
+    "main.60bba8f4.css.map": "/point-of-sales/static/css/main.60bba8f4.css.map",
+    "main.adb1f938.js.map": "/point-of-sales/static/js/main.adb1f938.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.60bba8f4.css",
+    "static/js/main.adb1f938.js"
+  ]
+}
